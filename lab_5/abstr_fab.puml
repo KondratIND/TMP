@@ -1,0 +1,64 @@
+@startuml abstr
+
+class WindowFactory {
+    +create_window(name: string): Window
+    +create_button(name: string): Button
+}
+
+class MacOsFactory {
+    class Window {
+        -name: string
+        -button: string[]
+        -style: string
+        +__init__(name: string)
+        +add_button(btn: Button): void
+        +show(): void
+    }
+    class Button {
+        -name: string
+        -style: string
+        +__init__(name: string)
+    }
+}
+
+class LinuxFactory {
+    class Window {
+        -name: string
+        -button: string[]
+        -style: string
+        +__init__(name: string)
+        +add_button(btn: Button): void
+        +show(): void
+    }
+    class Button {
+        -name: string
+        -style: string
+        +__init__(name: string)
+    }
+}
+
+class Window {
+    -name: string
+    -button: string[]
+    -style: string
+    +__init__(name: string)
+    +add_button(btn: Button): void
+    +show(): void
+}
+
+class Button {
+    -name: string
+    -style: string
+    +__init__(name: string)
+}
+
+WindowFactory --> Window
+WindowFactory --> Button
+MacOsFactory --> Window
+MacOsFactory --> Button
+LinuxFactory --> Window
+LinuxFactory --> Button
+Window --> Button
+create_dialog(factory: WindowFactory) --> Window
+
+@enduml

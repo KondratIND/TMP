@@ -1,0 +1,38 @@
+@startuml
+
+interface IMediator {
+    +colleague1_method(): string
+    +colleague2_method(): string
+}
+
+class Mediator {
+    -colleague1: Colleague1
+    -colleague2: Colleague2
+    +__init__()
+    +colleague1_method(): string
+    +colleague2_method(): string
+}
+
+class Colleague1 {
+    +colleague1_method(): string
+    +colleague2_method(): string
+}
+
+class Colleague2 {
+    +colleague1_method(): string
+    +colleague2_method(): string
+}
+
+IMediator <|.. Mediator
+Mediator ..> Colleague1
+Mediator ..> Colleague2
+Colleague1 <|.. IMediator
+Colleague2 <|.. IMediator
+
+class Program {
+    +main(): void
+}
+
+Program ..> Mediator
+
+@enduml

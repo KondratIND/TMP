@@ -1,0 +1,50 @@
+@startuml
+
+class Builder {
+    {abstract} +build_body(): Body
+    {abstract} +build_lamp(): Lamp
+    {abstract} +build_battery(): Battery
+    {abstract} +create_flashlight(): Flashlight
+}
+
+class Flashlight {
+    -_shine: bool
+    -_body: Body
+    -_lamp: Lamp
+    -_battery: Battery
+    +on(): void
+    +off(): void
+    +__str__(): string
+}
+
+class Lamp {
+}
+
+class Body {
+}
+
+class Battery {
+}
+
+class FlashlightBuilder {
+    +build_body(): Body
+    +build_lamp(): Lamp
+    +build_battery(): Battery
+    +create_flashlight(): Flashlight
+}
+
+Builder <|.. FlashlightBuilder
+Builder <|-- Flashlight
+
+Flashlight o-- Lamp
+Flashlight o-- Body
+Flashlight o-- Battery
+
+class Program {
+    +main(): void
+}
+
+Program ..> FlashlightBuilder
+Program ..> Flashlight
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+
+interface IA {
+    +method_a(): void
+}
+
+class ClassA {
+    +method_a(): void
+}
+
+interface IB {
+    +method_b(): void
+}
+
+class ClassB {
+    +method_b(): void
+}
+
+class ClassBAdapter {
+    -class_b: ClassB
+    +__init__()
+    +method_a(): void
+}
+
+interface IA <|.. ClassA
+interface IB <|.. ClassB
+IA <|.. ClassBAdapter
+
+ClassA ..> IA: implements
+ClassB ..> IB: implements
+ClassBAdapter -- ClassB: composition
+
+class Program {
+    +main(): void
+}
+
+Program ..> ClassA
+Program ..> ClassBAdapter
+
+@enduml
